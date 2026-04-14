@@ -200,7 +200,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col" style={{ background: "linear-gradient(180deg, rgba(255,184,89,0.10) 0%, rgba(255,184,89,0.04) 12%, #fffeab 28%)" }}>
+    <main className="min-h-screen flex flex-col" style={{ backgroundColor: "#c1d7ff" }}>
       <BackgroundDecor />
       {/* Header */}
       <header className="border-b border-[#e5a24e] sticky top-0 z-50 shadow-sm" style={{ backgroundColor: "#ffb859" }}>
@@ -208,10 +208,10 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <Image src="/icons/app-logo.png" alt="" width={44} height={44} className="rounded-xl shadow-sm object-contain" />
             <div>
-              <h1 className="font-bold text-2xl leading-tight tracking-tight text-[#3a2200]">
+              <h1 className="font-bold text-2xl leading-tight tracking-wide text-[#1c176f]" style={{ fontFamily: "Georgia, 'Times New Roman', serif", letterSpacing: "0.03em" }}>
                 {t.appTitle}
               </h1>
-              <p className="text-xs text-[#5c3a0a]/80 hidden sm:block">
+              <p className="text-xs text-[#1c176f]/60 hidden sm:block">
                 {t.appSubtitle}
               </p>
             </div>
@@ -253,11 +253,11 @@ export default function Home() {
 
         {/* Error State */}
         {appState === "error" && error && (
-          <Card className="mt-4 border-destructive/50 bg-destructive/5">
+          <Card className="mt-4 border-[#1c176f]/30 bg-[#1c176f]/5">
             <CardContent className="pt-6 flex items-start gap-3">
-              <AlertCircle className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
+              <AlertCircle className="h-5 w-5 text-[#1c176f] shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-medium text-destructive">
+                <p className="text-sm font-medium text-[#1c176f]">
                   {t.somethingWentWrong}
                 </p>
                 <p className="text-sm text-muted-foreground mt-1">{error}</p>

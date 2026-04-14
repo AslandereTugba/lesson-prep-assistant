@@ -15,8 +15,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  ChevronDown,
-  ChevronUp,
   Sparkles,
 } from "lucide-react";
 import Image from "next/image";
@@ -61,8 +59,6 @@ export function LessonForm({ onSubmit, isGenerating }: LessonFormProps) {
     "quick" | "interactive" | "practice" | "inclusive" | undefined
   >(undefined);
   const [learnerSupports, setLearnerSupports] = useState<string[]>([]);
-  const [showCustomize, setShowCustomize] = useState(false);
-  const [showSupports, setShowSupports] = useState(false);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -98,10 +94,10 @@ export function LessonForm({ onSubmit, isGenerating }: LessonFormProps) {
   }
 
   const LESSON_MODES = [
-    { value: "quick" as const, label: t.modeQuickLabel, description: t.modeQuickDesc, iconSrc: "/icons/quick-clear.png" },
-    { value: "interactive" as const, label: t.modeInteractiveLabel, description: t.modeInteractiveDesc, iconSrc: "/icons/interactive-icon.png" },
-    { value: "practice" as const, label: t.modePracticeLabel, description: t.modePracticeDesc, iconSrc: "/icons/practice focused.png" },
-    { value: "inclusive" as const, label: t.modeInclusiveLabel, description: t.modeInclusiveDesc, iconSrc: "/icons/inclusive.png" },
+    { value: "quick" as const, label: t.modeQuickLabel, description: t.modeQuickDesc, iconSrc: "/icons/quick-clear.png", iconSize: 40 },
+    { value: "interactive" as const, label: t.modeInteractiveLabel, description: t.modeInteractiveDesc, iconSrc: "/icons/interactive-icon.png", iconSize: 48 },
+    { value: "practice" as const, label: t.modePracticeLabel, description: t.modePracticeDesc, iconSrc: "/icons/practice focused.png", iconSize: 40 },
+    { value: "inclusive" as const, label: t.modeInclusiveLabel, description: t.modeInclusiveDesc, iconSrc: "/icons/inclusive.png", iconSize: 64 },
   ];
 
   const LEARNER_SUPPORTS = [
@@ -120,10 +116,10 @@ export function LessonForm({ onSubmit, isGenerating }: LessonFormProps) {
         <CardHeader className="pb-4">
           <div className="flex items-center gap-2">
             <div className="bg-primary/10 rounded-lg p-1.5">
-              <Image src="/icons/core-details.png" alt="" width={24} height={24} className="object-contain" />
+              <Image src="/icons/core-details.png" alt="" width={44} height={44} className="object-contain" />
             </div>
             <div>
-              <CardTitle className="text-xl font-semibold">{t.sectionCoreTitle}</CardTitle>
+              <CardTitle className="text-xl font-semibold text-[#1c176f]">{t.sectionCoreTitle}</CardTitle>
               <p className="text-xs text-muted-foreground">{t.sectionCoreHelper}</p>
             </div>
           </div>
@@ -220,39 +216,19 @@ export function LessonForm({ onSubmit, isGenerating }: LessonFormProps) {
 
       {/* Card 2: Customize */}
       <Card>
-        <button
-          type="button"
-          onClick={() => setShowCustomize(!showCustomize)}
-          className="w-full"
-        >
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="bg-primary/10 rounded-lg p-1.5">
-                  <Image src="/icons/customize.png" alt="" width={24} height={24} className="object-contain" />
-                </div>
-                <div className="text-left">
-                  <CardTitle className="text-xl font-semibold">{t.sectionCustomizeTitle}</CardTitle>
-                  <p className="text-xs text-muted-foreground">
-                    {showCustomize
-                      ? t.sectionCustomizeHelper
-                      : (learningGoal || backgroundKnowledge || lessonMode)
-                        ? `${[learningGoal ? t.learningGoalLabel : null, backgroundKnowledge ? t.backgroundKnowledgeLabel : null, lessonMode ? t.lessonModeLabel : null].filter(Boolean).join(" · ")}`
-                        : t.noCustomizations}
-                  </p>
-                </div>
-              </div>
-              {showCustomize ? (
-                <ChevronUp className="h-4 w-4 text-muted-foreground" />
-              ) : (
-                <ChevronDown className="h-4 w-4 text-muted-foreground" />
-              )}
+        <CardHeader className="pb-4">
+          <div className="flex items-center gap-2">
+            <div className="bg-primary/10 rounded-lg p-1.5">
+              <Image src="/icons/customize.png" alt="" width={44} height={44} className="object-contain" />
             </div>
-          </CardHeader>
-        </button>
+            <div>
+              <CardTitle className="text-xl font-semibold text-[#1c176f]">{t.sectionCustomizeTitle}</CardTitle>
+              <p className="text-xs text-muted-foreground">{t.sectionCustomizeHelper}</p>
+            </div>
+          </div>
+        </CardHeader>
 
-        {showCustomize && (
-          <CardContent className="space-y-5 pt-0">
+        <CardContent className="space-y-5 pt-0">
             {/* Learning Goal */}
             <div>
               <Label htmlFor="learningGoal" className="text-[0.9rem] font-semibold text-foreground">
@@ -321,8 +297,8 @@ export function LessonForm({ onSubmit, isGenerating }: LessonFormProps) {
                         )
                       }
                     >
-                      <CardContent className="p-3 flex items-start gap-2.5">
-                        <Image src={mode.iconSrc} alt="" width={22} height={22} className="mt-0.5 shrink-0 object-contain" />
+                      <CardContent className="p-3 flex items-center gap-2.5">
+                        <Image src={mode.iconSrc} alt="" width={mode.iconSize} height={mode.iconSize} className="shrink-0 object-contain" />
                         <div>
                           <p className="text-base font-medium">{mode.label}</p>
                           <p className="text-sm text-muted-foreground">
@@ -336,44 +312,23 @@ export function LessonForm({ onSubmit, isGenerating }: LessonFormProps) {
               </div>
             </div>
           </CardContent>
-        )}
       </Card>
 
       {/* Card 3: Learner Supports */}
       <Card>
-        <button
-          type="button"
-          onClick={() => setShowSupports(!showSupports)}
-          className="w-full"
-        >
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="bg-primary/10 rounded-lg p-1.5">
-                  <Image src="/icons/learner-supports.png" alt="" width={24} height={24} className="object-contain" />
-                </div>
-                <div className="text-left">
-                  <CardTitle className="text-xl font-semibold">{t.sectionSupportsTitle}</CardTitle>
-                  <p className="text-xs text-muted-foreground">
-                    {showSupports
-                      ? t.sectionSupportsHelper
-                      : learnerSupports.length > 0
-                        ? `${learnerSupports.length} ${t.supportsSelected}`
-                        : t.noneSelected}
-                  </p>
-                </div>
-              </div>
-              {showSupports ? (
-                <ChevronUp className="h-4 w-4 text-muted-foreground" />
-              ) : (
-                <ChevronDown className="h-4 w-4 text-muted-foreground" />
-              )}
+        <CardHeader className="pb-4">
+          <div className="flex items-center gap-2">
+            <div className="bg-primary/10 rounded-lg p-1.5">
+              <Image src="/icons/learner-supports.png" alt="" width={24} height={24} className="object-contain" />
             </div>
-          </CardHeader>
-        </button>
+            <div>
+              <CardTitle className="text-xl font-semibold text-[#1c176f]">{t.sectionSupportsTitle}</CardTitle>
+              <p className="text-xs text-muted-foreground">{t.sectionSupportsHelper}</p>
+            </div>
+          </div>
+        </CardHeader>
 
-        {showSupports && (
-          <CardContent className="space-y-3 pt-0">
+        <CardContent className="space-y-3 pt-0">
             {LEARNER_SUPPORTS.map((support) => (
               <div key={support.id} className="flex items-center gap-2">
                 <Checkbox
@@ -390,7 +345,6 @@ export function LessonForm({ onSubmit, isGenerating }: LessonFormProps) {
               </div>
             ))}
           </CardContent>
-        )}
       </Card>
 
       {/* Submit Button */}
