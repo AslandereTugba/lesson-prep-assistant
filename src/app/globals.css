@@ -7,8 +7,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-inter);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -49,38 +49,38 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --background: oklch(0.978 0.004 80);
+  --foreground: oklch(0.22 0.02 270);
+  --card: #ecf7ff;
+  --card-foreground: oklch(0.18 0.02 250);
+  --popover: oklch(0.995 0.002 80);
+  --popover-foreground: oklch(0.22 0.02 270);
+  --primary: oklch(0.55 0.18 270);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.94 0.03 175);
+  --secondary-foreground: oklch(0.25 0.04 175);
+  --muted: oklch(0.955 0.01 270);
+  --muted-foreground: oklch(0.5 0.02 270);
+  --accent: oklch(0.94 0.03 175);
+  --accent-foreground: oklch(0.25 0.04 175);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --border: oklch(0.92 0.01 270);
+  --input: oklch(0.92 0.01 270);
+  --ring: oklch(0.55 0.18 270);
+  --chart-1: oklch(0.55 0.18 270);
+  --chart-2: oklch(0.65 0.12 175);
+  --chart-3: oklch(0.7 0.14 330);
+  --chart-4: oklch(0.75 0.1 80);
+  --chart-5: oklch(0.6 0.15 30);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.97 0.005 270);
+  --sidebar-foreground: oklch(0.22 0.02 270);
+  --sidebar-primary: oklch(0.55 0.18 270);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.94 0.03 175);
+  --sidebar-accent-foreground: oklch(0.25 0.04 175);
+  --sidebar-border: oklch(0.92 0.01 270);
+  --sidebar-ring: oklch(0.55 0.18 270);
 }
 
 .dark {
@@ -127,4 +127,90 @@
   html {
     @apply font-sans;
   }
+}
+
+/* Animated background blobs */
+@keyframes blob-drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  20% {
+    transform: translate(80px, 50px) scale(1.08);
+  }
+  50% {
+    transform: translate(30px, -40px) scale(0.95);
+  }
+  75% {
+    transform: translate(-50px, 30px) scale(1.04);
+  }
+}
+
+@keyframes blob-drift-reverse {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(-60px, -40px) scale(1.06);
+  }
+  50% {
+    transform: translate(-30px, 50px) scale(0.94);
+  }
+  75% {
+    transform: translate(40px, -25px) scale(1.03);
+  }
+}
+
+@keyframes blob-drift-slow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  30% {
+    transform: translate(50px, -60px) scale(1.08);
+  }
+  60% {
+    transform: translate(-40px, 40px) scale(0.93);
+  }
+  85% {
+    transform: translate(20px, -15px) scale(1.02);
+  }
+}
+
+@utility animate-blob-drift {
+  animation: blob-drift 22s ease-in-out infinite;
+}
+
+@utility animate-blob-drift-reverse {
+  animation: blob-drift-reverse 28s ease-in-out infinite;
+}
+
+@utility animate-blob-drift-slow {
+  animation: blob-drift-slow 34s ease-in-out infinite;
+}
+
+/* Vertical wave glow animations */
+@keyframes wave-drift {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-30px) scaleY(1.06); }
+}
+
+@keyframes wave-drift-reverse {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(25px) scaleY(1.04); }
+}
+
+@keyframes wave-drift-slow {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-20px) scaleY(1.03); }
+}
+
+@utility animate-wave-drift {
+  animation: wave-drift 18s ease-in-out infinite;
+}
+
+@utility animate-wave-drift-reverse {
+  animation: wave-drift-reverse 24s ease-in-out infinite;
+}
+
+@utility animate-wave-drift-slow {
+  animation: wave-drift-slow 30s ease-in-out infinite;
 }
